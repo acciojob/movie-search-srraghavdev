@@ -33,7 +33,7 @@ const App = () => {
         Seterror("")
       }}></input>
       <button onClick={getdata}></button>
-      {error && <div>Movie Not found</div>}
+      {error && <div className="error">Movie Not found</div>}
       { movies && <div> {movies.map(element=>{
           return (
             <li>

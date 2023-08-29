@@ -8,7 +8,8 @@ const App = () => {
   let [error,Seterror]=useState('')
   let [data,Setdata]=useState('')
   let [movies,Setmovies]=useState([])
-  async function getdata(){
+  async function getdata(event){
+    event.preventDefault()
     try{
       let res=  await axios.get(`http://www.omdbapi.com/?s=${data}&apikey=105c5568`)
     console.log(res.data)
@@ -17,7 +18,7 @@ const App = () => {
       Seterror('')
     }
     else{
-      Seterror('Invalid movie name. Please try again.')
+      Seterror(res.data.Error)
       Setmovies([])
     }
     }
@@ -28,12 +29,14 @@ const App = () => {
   return (
     <div>
       <h1>Search Movie</h1>
-      <input type='text' onChange={(event)=>{
+      <form onSubmit={getdata}>
+       <input type='text' onChange={(event)=>{
         Setdata(event.target.value)
         Seterror("")
       }}></input>
-      <button onClick={getdata}></button>
-      {error && <div className="error">Movie Not found</div>}
+      <button></button> 
+      </form>
+      {error && <div className="error">{error}</div>}
       { movies && <div> {movies.map(element=>{
           return (
             <li>

@@ -18,7 +18,7 @@ const App = () => {
       Seterror('')
     }
     else{
-      Seterror(res.data.Error)
+      Seterror('Invalid movie name. Please try again.')
       Setmovies([])
     }
     }
